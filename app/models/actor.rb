@@ -28,6 +28,13 @@ class Actor < ApplicationRecord
     :source => :movie,
   })
 
+  # This one returns all directors that are associated with movies that the actor is in
+  # 1st hop: Get a list of character_ids associated with an actor_id
+  # 2nd hop: Get a list of movie_ids associated with each character_id
+  # 3rd hop: Get a list of directors associated with each movie
+
+  has_many(:directors, { :through => :filmography, :source => :director })
+
   # def filmography
   #   the_many = Array.new
 
